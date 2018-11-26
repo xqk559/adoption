@@ -4,20 +4,25 @@ const zips = require('zips');
 
 class App extends Component {
   state = {
-    zip: 0,
+    zip: 21822,
+    x: 21822
   }
 
   render() {
-    console.log(zips.getByZipCode(21822))
+    console.log(zips.getByZipCode(this.state.zip))
+    console.log(zips.getByZipCode(this.state.zip.city))
     let zipHandler = (event) => {
       this.setState({
         zip: event.target.value
       })
     }
-    let x;
     let buttonHandler = (event) => {
-      let x=zips.getByZipCode(this.state.zip).city
+      this.setState({
+        x: this.state.zip
+      })
     }
+    let z = zips.getByZipCode(this.state.x);
+    console.log(z);
     return (
       <div className="App">
       <div>
@@ -28,9 +33,9 @@ class App extends Component {
         <br></br>
         <button onClick={buttonHandler}>Search that shit</button>
         <input type="text" onChange={zipHandler} key="zipinput" />
-        <p>{console.log(zips.getByZipCode(21822))}</p>
-        <p>{x}</p>
+        <p>{this.state.x}</p>
         <p>{this.state.zip}</p>
+        <p>{z.city}</p>
       </div>
       </div>
     );
